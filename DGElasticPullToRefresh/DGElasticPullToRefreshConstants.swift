@@ -35,9 +35,10 @@ public struct DGElasticPullToRefreshConstants {
         static let PanGestureRecognizerState = "panGestureRecognizer.state"
     }
     
-    public static var WaveMaxHeight: CGFloat = 70.0
-    public static var MinOffsetToPull: CGFloat = 95.0
-    public static var LoadingContentInset: CGFloat = 50.0
-    public static var LoadingViewSize: CGFloat = 30.0
+    public static var WaveMaxHeight: CGFloat = 20//70.0
+    public static var MinOffsetToPull: CGFloat = 100//95.0 到多少距离才可以刷新
+    public static var LoadingContentInset: CGFloat = 80//50.0 //
+    public static var LoadingViewSize: CGFloat = 43.0
+    public static var BeginWaveHeight: CGFloat = 30
 	
 }
