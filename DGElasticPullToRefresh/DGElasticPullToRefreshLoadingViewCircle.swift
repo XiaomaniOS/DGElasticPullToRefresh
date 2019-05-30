@@ -93,8 +93,8 @@ open class DGElasticPullToRefreshLoadingViewCircle: DGElasticPullToRefreshLoadin
         }
     }
     
-    override open func startAnimating() {
-        super.startAnimating()
+    override open func didBeginRefresh() {
+        super.didBeginRefresh()
         
         if shapeLayer.animation(forKey: kRotationAnimation) != nil { return }
         
@@ -107,8 +107,8 @@ open class DGElasticPullToRefreshLoadingViewCircle: DGElasticPullToRefreshLoadin
         shapeLayer.add(rotationAnimation, forKey: kRotationAnimation)
     }
     
-    override open func stopLoading() {
-        super.stopLoading()
+    override open func didEndRefresh() {
+        super.didEndRefresh()
         
         shapeLayer.removeAnimation(forKey: kRotationAnimation)
     }

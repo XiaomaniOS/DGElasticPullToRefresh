@@ -60,14 +60,18 @@ open class DGElasticPullToRefreshView: UIView {
             _state = newValue
             
             if previousValue == .dragging && newValue == .animatingBounce {
-                loadingView?.startAnimating()
+                loadingView?.didBeginRefresh()
                 animateBounce()
             } else if newValue == .loading && actionHandler != nil {
                 actionHandler()
             } else if newValue == .animatingToStopped {
-                resetScrollViewContentInset(shouldAddObserverWhenFinished: true, animated: true, completion: { [weak self] () -> () in self?.state = .stopped })
+                
+                loadingView?.willEndRefresh(completion: { [weak self] _ in
+                    self?.resetScrollViewContentInset(shouldAddObserverWhenFinished: true, animated: true, completion: { [weak self] () -> () in self?.state = .stopped })
+                })
+                
             } else if newValue == .stopped {
-                loadingView?.stopLoading()
+                loadingView?.didEndRefresh()
             }
         }
     }

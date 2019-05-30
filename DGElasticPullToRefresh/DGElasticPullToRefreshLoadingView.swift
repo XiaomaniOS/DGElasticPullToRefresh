@@ -58,16 +58,19 @@ open class DGElasticPullToRefreshLoadingView: UIView {
     // MARK: -
     // MARK: Methods
     
-    open func setPullProgress(_ progress: CGFloat) {
-        
-    }
+    open func setPullProgress(_ progress: CGFloat) { }
     
-    open func startAnimating() {
-        
-    }
+    ///  Refresh will begin after pull release
+    open func didBeginRefresh() { }
     
-    open func stopLoading() {
-        
+    ///  The status after refresh loading finished, before loading view dismiss
+    ///
+    ///  - parameter completion: set `true` when animation completed in the end
+    ///  - attention: override this method need perform `completion` handle, and do not need `super.willEndRefresh`
+    open func willEndRefresh(completion: ((Bool) -> Void)?) {
+        completion?(true)
     }
 
+    ///  Refresh end after all animation completed
+    open func didEndRefresh() { }
 }
