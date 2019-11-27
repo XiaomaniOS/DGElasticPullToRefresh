@@ -56,19 +56,19 @@ public extension NSObject {
     // MARK: -
     // MARK: Methods
     
-    public func dg_addObserver(_ observer: NSObject, forKeyPath keyPath: String) {
+    func dg_addObserver(_ observer: NSObject, forKeyPath keyPath: String) {
         let observerInfo = [keyPath : observer]
         
-        if dg_observers.index(where: { $0 == observerInfo }) == nil {
+        if dg_observers.firstIndex(where: { $0 == observerInfo }) == nil {
             dg_observers.append(observerInfo)
             addObserver(observer, forKeyPath: keyPath, options: .new, context: nil)
         }
     }
     
-    public func dg_removeObserver(_ observer: NSObject, forKeyPath keyPath: String) {
+    func dg_removeObserver(_ observer: NSObject, forKeyPath keyPath: String) {
         let observerInfo = [keyPath : observer]
         
-        if let index = dg_observers.index(where: { $0 == observerInfo}) {
+        if let index = dg_observers.firstIndex(where: { $0 == observerInfo}) {
             dg_observers.remove(at: index)
             removeObserver(observer, forKeyPath: keyPath)
         }
@@ -99,7 +99,7 @@ public extension UIScrollView {
     
     // MARK: - Methods (Public)
     
-    @objc public func dg_addPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: DGElasticPullToRefreshLoadingView?) {
+    @objc func dg_addPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: DGElasticPullToRefreshLoadingView?) {
         isMultipleTouchEnabled = false
         panGestureRecognizer.maximumNumberOfTouches = 1
 
@@ -112,25 +112,25 @@ public extension UIScrollView {
         pullToRefreshView.observing = true
     }
     
-    @objc public func dg_removePullToRefresh() {
+    @objc func dg_removePullToRefresh() {
         pullToRefreshView?.disassociateDisplayLink()
         pullToRefreshView?.observing = false
         pullToRefreshView?.removeFromSuperview()
     }
     
-    @objc public func dg_setPullToRefreshBackgroundColor(_ color: UIColor) {
+    @objc func dg_setPullToRefreshBackgroundColor(_ color: UIColor) {
         pullToRefreshView?.backgroundColor = color
     }
     
-    @objc public func dg_setPullToRefreshFillColor(_ color: UIColor) {
+    @objc func dg_setPullToRefreshFillColor(_ color: UIColor) {
         pullToRefreshView?.fillColor = color
     }
     
-    @objc public func dg_stopLoading() {
+    @objc func dg_stopLoading() {
         pullToRefreshView?.stopLoading()
     }
     
-    @objc public func dg_setPullToRefreshBounce(bounce : Bool) {
+    @objc func dg_setPullToRefreshBounce(bounce : Bool) {
         pullToRefreshView?.bounce = bounce
     }
 }
@@ -161,8 +161,8 @@ public extension UIPanGestureRecognizer {
 // MARK: -
 // MARK: (UIGestureRecognizerState) Extension
 
-public extension UIGestureRecognizerState {
-    func dg_isAnyOf(_ values: [UIGestureRecognizerState]) -> Bool {
+public extension UIGestureRecognizer.State {
+    func dg_isAnyOf(_ values: [UIGestureRecognizer.State]) -> Bool {
         return values.contains(where: { $0 == self })
     }
 }
