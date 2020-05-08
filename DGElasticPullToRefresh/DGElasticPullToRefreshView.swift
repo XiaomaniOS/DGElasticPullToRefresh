@@ -313,13 +313,13 @@ open class DGElasticPullToRefreshView: UIView {
         resetScrollViewContentInset(shouldAddObserverWhenFinished: false, animated: false, completion: nil)
         
         let centerY = DGElasticPullToRefreshConstants.LoadingContentInset
-        let duration = 0.9
+        let duration = 0.36
         
         scrollView.isScrollEnabled = false
         startDisplayLink()
         scrollView.dg_removeObserver(self, forKeyPath: DGElasticPullToRefreshConstants.KeyPaths.ContentOffset)
         scrollView.dg_removeObserver(self, forKeyPath: DGElasticPullToRefreshConstants.KeyPaths.ContentInset)
-        UIView.animate(withDuration: 0.43, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.cControlPointView.center.y = centerY
             self?.l1ControlPointView.center.y = centerY
             self?.l2ControlPointView.center.y = centerY
@@ -338,7 +338,7 @@ open class DGElasticPullToRefreshView: UIView {
         })
         
         bounceAnimationHelperView.center = CGPoint(x: 0.0, y: originalContentInsetTop + currentHeight())
-        UIView.animate(withDuration: duration * 0.4, animations: { [weak self] in
+        UIView.animate(withDuration: duration, animations: { [weak self] in
             if let contentInsetTop = self?.originalContentInsetTop {
                 self?.bounceAnimationHelperView.center = CGPoint(x: 0.0, y: contentInsetTop + DGElasticPullToRefreshConstants.LoadingContentInset)
             }
